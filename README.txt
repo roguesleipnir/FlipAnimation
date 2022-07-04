@@ -7,8 +7,8 @@ http://files.scio.de/blog/FlipAnimation/FlipAnimation.zip
 Documentation:
 http://www.scio.de/en/blog-a-news/scio-development-blog-en/entry/flip-animation-add-on-for-mirroring-keyframes-in-blender
 
-Tested on Mac OSX, Blender 2.58, 2.62 and Linux with Blender 2.62
-NOTE: Starting with version 2.63 the add-on refuses to work. It's still unclear why the values pasted by bpy.ops.pose.paste(Flipped=True) are wrong.
+Tested on Windows 10, Blender 3.2.0
+NOTE: Couldn't fix syntax errors with Append mode, so that feature is disabled.
 
 Quick instructions:
 - Download
@@ -17,11 +17,12 @@ Quick instructions:
 - Select an action
 - Ensure that button 'Automatic Keyframe Insertion for Objects And Bones' in timeline view is pressed
 - Ensure that button 'Automatic Keyframe Insertion Using Active Keying Set Only' in timeline view is pressed
-- In 3D view look for a panel called 'Flip Animation' in Tool shelf (T)
+- In 3D view look for a panel called 'Flip Animation' in Tool shelf (T) under Animations
 - Press button 'Flip Current Action' to mirror the whole action currently selected
 
 Troubleshooting:
 
+- Middle Bone Forward / Backward rotations might not get flipped correctly. Those need to be fixed manually.
 - Check that your bones conform to Blender's bone naming conventions. That means suffix _ or . and then R / L, r / l, 
   right / left, Right / Left. Alternatively you can use them as prefix in similar way.
   Examples: Hand_R, Hand.r, Hand.Right, � or R_Hand, r.Hand, Right.Hand
@@ -42,10 +43,3 @@ Troubleshooting:
 - Sometimes pasting X-flipped poses lead to kind of weird results. I had this occasionally before I developed the 
   add-on and noticed some issues within the quaternions as the inversion did not perform right. Maybe this is solved 
   in the meantime. If you have this problem at one single bone, just modify the rotation slightly and it might disappear.
-
-     
-Developer info:
-
-- For debugging set debug_output = True at the beginning of class FlipAnimation and start Blender from terminal to 
-  see output
-
