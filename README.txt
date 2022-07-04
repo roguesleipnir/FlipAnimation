@@ -1,4 +1,4 @@
-FlipAnimation add-on for Blender (version > 2.58)
+FlipAnimation add-on for Blender (version > 3.2.0)
 Author Kay Bothfeld, SCIO System-Consulting GmbH & Co.KG
 
 Download:
@@ -18,16 +18,13 @@ Quick instructions:
 - Ensure that button 'Automatic Keyframe Insertion for Objects And Bones' in timeline view is pressed
 - Ensure that button 'Automatic Keyframe Insertion Using Active Keying Set Only' in timeline view is pressed
 - In 3D view look for a panel called 'Flip Animation' in Tool shelf (T)
-- Press button 'Flip Animation' to mirror the whole action currently selected
-- Check 'Append Mode', specify the range to flip and press 'Flip Animation' to get a mirrored copy the range appended
-  after the last frame
-
+- Press button 'Flip Current Action' to mirror the whole action currently selected
 
 Troubleshooting:
 
 - Check that your bones conform to Blender's bone naming conventions. That means suffix _ or . and then R / L, r / l, 
   right / left, Right / Left. Alternatively you can use them as prefix in similar way.
-  Examples: Hand_R, Hand.r, Hand.Right, É or R_Hand, r.Hand, Right.Hand
+  Examples: Hand_R, Hand.r, Hand.Right, ï¿½ or R_Hand, r.Hand, Right.Hand
 - Does the current keying set contain all relevant channels? For example check that you selected LocRotScale if your 
   keyframes define location, rotation and scaling changes
 - If the start or end frame is outside of the defined range of the action, the add-on shows a warning messages in the 

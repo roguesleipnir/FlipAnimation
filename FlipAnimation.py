@@ -20,13 +20,27 @@
 # ***** END GPL LICENCE BLOCK *****
 
 import bpy
+from bpy.types import (
+    Operator,
+    Menu,
+    Panel,
+    UIList,
+    PropertyGroup
+)
+
+from bpy.props import (
+    StringProperty,
+    IntProperty,
+    PointerProperty,
+    EnumProperty
+)
 
 bl_info = {
     "name": "Flip Animation",
     "description": "Performs a copy and paste flipped pose on all frames of currently selected action.",
     "author": "Kay Bothfeld",
-    "version": (0,3),
-    "blender": (2,5,8),
+    "version": (0,3,1),
+    "blender": (3,2,0),
     "location": "View3D > Pose Mode > Tool Shelf",
     "warning": "", # used for warning icon and text in addons panel 
     "wiki_url": "http://www.scio.de/en/blog-a-news/scio-development-blog-en/entry/flip-animation-add-on-for-mirroring-keyframes-in-blender",
@@ -36,19 +50,22 @@ bl_info = {
     }
 
 class FlipAnimationPanel(bpy.types.Panel) :
-    bl_space_type = "VIEW_3D"
-    bl_region_type = "TOOLS"
-    bl_context = "posemode"
-    bl_label = "Flip Animation"
- 
-    def draw(self, context) :
+    bl_label = 'Flip Animation'
+    bl_idname = "VIEW3D_PT_flip_animation"
+    bl_space_type = 'VIEW_3D'    
+    bl_region_type = 'UI'
+    bl_category = 'Animation'
+
+    def draw(self, context):
+        scene = context.scene
+        layout = self.layout
         col = self.layout.column(align = True)
-        col.prop(context.scene, "flip_animation_append_mode")
-        if context.scene.flip_animation_append_mode:
-            col.prop(context.scene, "flip_animation_start_frame")
-            col.prop(context.scene, "flip_animation_end_frame")
-            col.label("")
-        col.operator("pose.flip_animation", text = "Flip Animation")
+        # Cant get append to work...
+        # col.prop(context.scene, "flip_animation_append_mode")
+        # if context.scene.flip_animation_append_mode:
+        #     col.prop(context.scene, "flip_animation_start_frame")
+        #     col.prop(context.scene, "flip_animation_end_frame")
+        col.operator("pose.flip_animation", text = "Flip Current Action")
 
 
 class FlipAnimation (bpy.types.Operator) :
@@ -84,7 +101,7 @@ class FlipAnimation (bpy.types.Operator) :
     bl_options = {"REGISTER", "UNDO"}
     # bl_idname = "OBJECT_PT_ShowButtons"
     bl_space_type = "VIEW_3D"
-    bl_region_type = "TOOLS"
+    bl_region_type = "UI"
     bl_context = "posemode"
     text = "Flip whole animation"
 
@@ -281,7 +298,7 @@ class FlipAnimation (bpy.types.Operator) :
                 continue
             out = ""
             bones = frame_item[1]
-            context.scene.frame_set(frame)
+            context.scene.frame_set(int(frame))
             bpy.ops.pose.select_all(action='DESELECT')
             for bone_item in bones.items ():
                 self.num_changed += 1
@@ -300,7 +317,7 @@ class FlipAnimation (bpy.types.Operator) :
                 context.scene.frame_set(frame + self.append_frames_offset)
             bpy.ops.pose.select_mirror(extend=True)
             print(bpy.ops.pose.paste(flipped=True,selected_mask=True))
-            bpy.ops.anim.keyframe_insert(type='Available',confirm_success=self.debug_output)
+            bpy.ops.anim.keyframe_insert(type='Available')
             if frame == 5:
                 print (context.active_pose_bone, " (after): ", context.active_pose_bone.rotation_quaternion)
             
@@ -312,7 +329,7 @@ class FlipAnimation (bpy.types.Operator) :
             bpy.ops.pose.select_all(action='DESELECT')
             frame = frame_item[0]
             bones = frame_item[1]
-            context.scene.frame_set(frame)
+            context.scene.frame_set(int(frame))
             has_keyframe_selected = False
             for bone_item in bones.items ():
                 bone = bone_item[0]
@@ -327,7 +344,7 @@ class FlipAnimation (bpy.types.Operator) :
             if has_keyframe_selected:
                 if self.debug_output:
                     print (str(frame), " Delete: ", out)
-                bpy.ops.anim.keyframe_delete (type='Available',confirm_success=self.debug_output)
+                bpy.ops.anim.keyframe_delete (type='Available')
     
     
     def debug_print_keyframe_bone_dict (self):
@@ -373,7 +390,8 @@ def unregister() :
     del bpy.types.Scene.flip_animation_end_frame
     bpy.types.VIEW3D_MT_pose.remove(add_to_menu)
  
-if __name__ == "__main__" :
+ 
+if __name__ == '__main__':
     register()
     
 
