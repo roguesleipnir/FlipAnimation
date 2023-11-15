@@ -65,7 +65,7 @@ class FlipAnimationPanel(bpy.types.Panel) :
         # if context.scene.flip_animation_append_mode:
         #     col.prop(context.scene, "flip_animation_start_frame")
         #     col.prop(context.scene, "flip_animation_end_frame")
-        col.operator("pose.flip_animation", text = "Flip Current Action")
+        col.operator(FlipAnimation.bl_idname, text = "Flip Current Action")
 
 
 class FlipAnimation (bpy.types.Operator) :
@@ -357,7 +357,7 @@ class FlipAnimation (bpy.types.Operator) :
     
 
 def add_to_menu(self, context) :
-    self.layout.operator("pose.flip_animation", icon = "PLUGIN")
+    self.layout.operator(FlipAnimation.bl_idname, icon = "PLUGIN")
  
 def register() :
     bpy.types.Scene.flip_animation_append_mode = bpy.props.BoolProperty \
