@@ -1,14 +1,13 @@
-FlipAnimation add-on for Blender (version > 3.2.0)
+FlipAnimation add-on for Blender (version > 4.0.0)
 Author Kay Bothfeld, SCIO System-Consulting GmbH & Co.KG
+Updated by rogueSleipnir
 
-Download:
-http://files.scio.de/blog/FlipAnimation/FlipAnimation.zip
+Version 0.3.2
 
-Documentation:
-http://www.scio.de/en/blog-a-news/scio-development-blog-en/entry/flip-animation-add-on-for-mirroring-keyframes-in-blender
+Because of some breaking changes to Blender's 4.0.0 Python API,
+Use the `v3.6` tag for previous versions of Blender (3.2 to 3.6).
 
-Tested on Windows 10, Blender 3.2.0
-NOTE: Couldn't fix syntax errors with Append mode, so that feature is disabled.
+Tested on Windows 10, Blender 4.0.0
 
 Quick instructions:
 - Download
@@ -20,9 +19,14 @@ Quick instructions:
 - In 3D view look for a panel called 'Flip Animation' in Tool shelf (T) under Animations
 - Press button 'Flip Current Action' to mirror the whole action currently selected
 
-Troubleshooting:
+Notes:
+- Can Mirror Right/Left sided animations (X-Axis), i.e. for weapon handling.
+- Currently cannot Mirror Rotations on the Middle bones, those need to be fixed manually.
 
+Troubleshooting:
+- Mirrored Bones need to be named properly according to Blender standards.
 - Middle Bone Forward / Backward rotations might not get flipped correctly. Those need to be fixed manually.
+- Middle Bone Side rotations might not get flipped correctly. Those need to be fixed manually.
 - Check that your bones conform to Blender's bone naming conventions. That means suffix _ or . and then R / L, r / l, 
   right / left, Right / Left. Alternatively you can use them as prefix in similar way.
   Examples: Hand_R, Hand.r, Hand.Right, � or R_Hand, r.Hand, Right.Hand
@@ -43,3 +47,11 @@ Troubleshooting:
 - Sometimes pasting X-flipped poses lead to kind of weird results. I had this occasionally before I developed the 
   add-on and noticed some issues within the quaternions as the inversion did not perform right. Maybe this is solved 
   in the meantime. If you have this problem at one single bone, just modify the rotation slightly and it might disappear.
+
+Old Site Links, preserved for archiving:
+
+Download:
+http://files.scio.de/blog/FlipAnimation/FlipAnimation.zip
+
+Documentation:
+http://www.scio.de/en/blog-a-news/scio-development-blog-en/entry/flip-animation-add-on-for-mirroring-keyframes-in-blender

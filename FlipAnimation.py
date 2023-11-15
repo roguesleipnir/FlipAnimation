@@ -38,14 +38,13 @@ from bpy.props import (
 bl_info = {
     "name": "Flip Animation",
     "description": "Performs a copy and paste flipped pose on all frames of currently selected action.",
-    "author": "Kay Bothfeld",
-    "version": (0,3,1),
-    "blender": (3,2,0),
-    "location": "View3D > Pose Mode > Tool Shelf",
+    "author": "Kay Bothfeld, rogueSleipnir",
+    "version": (0,3,2),
+    "blender": (4,0,0),
+    "location": "View3D > Pose Mode > Tool Shelf > Animation",
     "warning": "", # used for warning icon and text in addons panel 
-    "wiki_url": "http://www.scio.de/en/blog-a-news/scio-development-blog-en/entry/flip-animation-add-on-for-mirroring-keyframes-in-blender",
-    "link": "http://www.scio.de/en/blog-a-news/scio-development-blog-en/entry/flip-animation-add-on-for-mirroring-keyframes-in-blender",
-    "tracker_url": "http://www.scio.de/",
+    "link": "https://github.com/roguesleipnir/FlipAnimation",
+    "tracker_url": "https://github.com/roguesleipnir/FlipAnimation",
     "category": "Animation"
     }
 
