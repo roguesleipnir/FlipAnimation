@@ -83,7 +83,7 @@ class FlipAnimation (bpy.types.Operator) :
     # Frame that was selected at the start of this plugin
     initial_frame = 0
     # Visible bone layers at the start of this plugin, used to restore at the end
-    initial_collections = ()
+    initial_collections = list()
     # Bone selection  at the start of this plugin, used to restore at the end
     initial_bone_selection = list()
     # Active bone  at the start of this plugin, used to restore at the end
@@ -146,7 +146,8 @@ class FlipAnimation (bpy.types.Operator) :
                     print("selecting ", bone)
                 bpy.context.active_object.data.bones[bone].select = True
         # Restore visible layers
-        context.active_object.data.collections[:] = self.initial_collections
+        for i in range(len(context.active_object.data.collections)):
+            context.active_object.data.collections[i].is_visible = self.initial_collections[i]
         # Restore status of "Keyframe insertion" buttons
         bpy.context.scene.tool_settings.use_keyframe_insert_auto=self.initial_keyframe_insert_auto
         bpy.context.scene.tool_settings.use_keyframe_insert_keyingset=self.initial_keyframe_insert_keyingset
@@ -219,8 +220,9 @@ class FlipAnimation (bpy.types.Operator) :
                 self.initial_bone_selection.append(bone.name)
 
         # make all layers visible; only visible bones can be keyframed
-        self.initial_collections = context.active_object.data.collections[:]
+        self.initial_collections = list()
         for i in range(len(context.active_object.data.collections)):
+            self.initial_collections.append(context.active_object.data.collections[i].is_visible)
             context.active_object.data.collections[i].is_visible = True
         return True
             
