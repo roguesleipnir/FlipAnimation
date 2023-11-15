@@ -260,7 +260,8 @@ class FlipAnimation (bpy.types.Operator) :
             for bone_item in frame[1].items ():
                 bone = bone_item[0]
                 bpy.ops.pose.select_all(action='DESELECT')
-                prev_active_bone = context.active_bone.name
+                if context.active_bone is not None:
+                  prev_active_bone = context.active_bone.name
                 bpy.context.active_object.data.bones.active=bpy.context.active_object.data.bones[bone]
                 result = None
                 result = bpy.ops.pose.select_mirror(only_active=True)
